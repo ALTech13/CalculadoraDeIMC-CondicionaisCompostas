@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Condicionais compostas</title>
+        <link rel="icon" type="image/png" href="logo.png">
+        <style>
+            header{
+                background-color: #555;
+                font: normal 10pt verdana;
+                height: 40px;
+                
+            }
+
+            a{
+                text-decoration: none;
+                color: wheat;
+                padding: 10px;
+                margin: auto 20px;
+                
+            }
+
+            a:hover{
+                color: rgba(245, 222, 179, 0.527);
+                border-bottom: rgb(216, 178, 9) 3px solid;
+            }
+
+            #logo{
+                width: 60px;
+                margin: 20px 30px;
+                border-right: 2px rgb(216, 178, 9) solid;
+                padding: 10px;
+            }
+
+            #logo:hover{
+                cursor: pointer;
+            }
+
+            #cuidados{
+                width: 300px;
+                padding: 0 100px;
+            }
+
+            .topo{
+                display: flex;
+                background-color: #f7f7f7;
+            }
+            main{
+                background-color: #f7f7f7
+            }
+            
+            h1{
+                color: rgb(243, 174, 46);
+                font: normal 15pt verdana;
+                margin: 50px;
+            }
+
+            h2{
+                color: rgb(243, 174, 46);
+                font: normal 20pt verdana;
+                margin: 10px 50px;
+                border-bottom: 2px rgb(216, 178, 9) solid;
+            }
+
+            h3{
+                color: gray;
+                font: normal 20pt verdana;
+                border-right: 2px rgb(216, 178, 9) solid;
+                width: 350px;
+            }
+
+            p{
+                color: rgb(32, 31, 31);
+                font: normal 12pt Helvetica;
+                margin: 10px 50px;
+                text-indent: 10px;
+            }
+
+            #calculadora{
+                border:rgb(216, 178, 9) 1px solid;
+                width: 500px;
+                padding: 20px;
+                
+            }
+            input{
+                width: 100px;
+                height: 30px;
+                border:rgb(216, 178, 9) 1px solid;
+                font: normal verdana;
+                border-radius: 10px;
+            }
+
+            button{
+                border: 1px gray solid;
+                border-radius: 10px;
+                width: 100px;
+                height: 30px;
+                background-color: rgb(216, 178, 9);
+                font-family: inherit;
+                
+                
+
+            }
+            
+            button:hover{
+                background-color: gray;
+                cursor: pointer;
+            }
+            
+            #new{
+                margin-top: 10px;
+            }
+
+            #result{
+                width: 400px;
+                height: 150px;
+                margin: 10px 0;
+                border: rgb(216, 178, 9) 1px solid;
+                border-radius: 5px;
+                background-color: rgb(243, 174, 46);
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 10px;
+            }
+                       
+        </style>
+        
+    </head>
+    <body>        
+        <header>
+            <nav>
+                <a href="">Quem somos|</a>
+                <a href="">Nossos serviços|</a>
+                <a href="">Curiosidades|</a>
+                <a href="">Novidades|</a>
+                <a href="">Nossa equipe|</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="topo">
+                
+                <img src="logo.png" alt="logo" id="logo">
+                
+                <h1>Grupo guia.saúde</h1>
+                <img src="topo.png" alt="imagens" id="cuidados">
+            </div>
+            <img src="imagem.png" alt="fotosaude">
+            <div id="corpo">
+                <h2>Calculadora de IMC</h2>
+                <p>IMC é a sigla para Índice de Massa Corporal,que é um cálculo que serve para avaliar se a pessoa está dentro do seu peso ideal em relação à altura. Assim, de acordo com o valor do resultado de IMC, a pessoa pode saber se está dentro do peso ideal, acima ou abaixo do peso desejado.</p>
+                <p>Estar dentro do peso certo é importante porque estar acima ou abaixo desse peso pode influenciar bastante a saúde, aumentando o risco de doenças como desnutrição quando se está abaixo do peso, e AVC ou infarto, quando se está acima do peso. Assim, é comum os médicos, enfermeiros e nutricionistas avaliem o IMC da pessoa nas consultas de rotina para verificar a possibilidade de doenças que a pessoa pode estar pre-disposta.
+                <h3>calcule seu imc a baixo:</h3>
+            </div>
+            <div id="calculadora">
+            <p>Digite seu peso e sua altura</p>
+                <input type="number" name="txpeso" id="txpeso" placeholder="Peso em Kg">
+                <input type="number" name="txaltura" id="txaltura" placeholder="Altura em M">
+                <button id="calcular">Calcular</button>
+                <div id="result"></div>
+                <button id="novo">Nova consulta</button>
+            </div>
+        </main>
+
+        <script>
+            var txpeso = window.document.querySelector('#txpeso')
+            var txaltura = window.document.querySelector('#txaltura')
+            var calcular = window.document.querySelector('#calcular')
+            var novo = window.document.querySelector('#novo')
+            var result = window.document.querySelector('#result')
+
+            calcular.addEventListener('click', imc)
+            novo.addEventListener('click', clear)
+
+            function imc(){
+                let peso = Number(txpeso.value)
+                let altura = Number(txaltura.value)
+                let seuimc = peso / (altura**2)
+
+                result.innerHTML= `Seu IMC é de <strong>${seuimc.toFixed(2)}</strong> <br><br>`
+
+                if(seuimc < 18.5){
+                    result.innerText+='Isso quer dizer que você está abaixo do peso. Procure um de nossos nutricionistas para ser orientado a ganhar peso com saúde!'
+                }else if((seuimc > 18.5) && (seuimc <= 24.9)){
+                    result.innerText += 'Isso quer dizer que você está no peso ideal, continue firme e mantenha uma rotina saldável!'
+                }else if((seuimc >= 25.0) && (seuimc <= 29.9)){
+                    result.innerText += 'Isso quer dizer que você está levemente a cima do peso, procure um dos nossos nutricionistas e um educador físico para te ajudar nesse processo!'
+                }else if((seuimc >= 30.0) && (seuimc <= 34.9)){
+                    result.innerText += 'Isso quer dizer que você está com obesidade nível 1, procure nossos médicos e veja como ajustar seu peso de forma saldável!'
+                }else if((seuimc >= 35.0) && (seuimc <= 39.9)){
+                    result.innerText += 'Isso quer dizer que você está com obesidade nível 2, não deixe para depois, sua saúde é importante, procure nossa equipe e vamos ajudá-lo a ajustar seu peso de forma saldável!'
+                }else if(seuimc > 40){
+                    result.innerText += 'Isso quer dizer que você está com obesidade nível 3 (obesidade mórbida), agende uma consulta agora mesmo e vamos te ajudar a cuidar da sua saúde!'
+                } 
+            }
+
+            function clear(){
+                txpeso.value = ""
+                txaltura.value = ""
+                result.innerText=""
+            }
+        </script>
+
+    </body>
+</html>
